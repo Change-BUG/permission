@@ -1,0 +1,11 @@
+spring:
+  # MySQL数据库
+  datasource:
+    # 驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 链接
+    url: jdbc:mysql://192.168.10.8:3306/permission?serverTimezone=UTC&characterEncoding=utf-8
+    # 账号
+    username: root
+    # 密码
+    password: 1234
