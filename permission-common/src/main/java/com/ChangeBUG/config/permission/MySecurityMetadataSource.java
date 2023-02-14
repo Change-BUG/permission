@@ -22,8 +22,9 @@ import java.util.List;
 @Component
 public class MySecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
+    // 接口权限表
     @Autowired
-    SysResourceService service;
+    private SysResourceService service;
 
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
@@ -35,7 +36,6 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
         if (CollectionUtils.isEmpty(roles)) {
             return null;
         }
-
         // 自定义角色信息 --> Security的权限格式
         String[] attributes = roles.toArray(new String[0]);
         return SecurityConfig.createList(attributes);

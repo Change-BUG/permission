@@ -23,7 +23,7 @@ multipart:
 spring:
   # 多环境配置
   profiles:
-    active: BUG2
+    active: BUG1
   # 配置项目热部署
   devtools:
     restart:
@@ -46,7 +46,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   # mapper-locations: classpath*:mapperxml/*Mapper.xml
 
-################################################## JWT
+########################### JWT
 
 jwt:
   # JWT 存储的请求头

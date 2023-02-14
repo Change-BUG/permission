@@ -10,7 +10,7 @@ import java.util.Properties;
 
 //* 验证码 图片
 @Configuration
-public class CatpChaConfig {
+public class KaptChaConfig {
 
     @Bean
     public DefaultKaptcha defaultKaptcha() {

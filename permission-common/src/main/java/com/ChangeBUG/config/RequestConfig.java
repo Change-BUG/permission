@@ -44,9 +44,7 @@ public class RequestConfig extends OncePerRequestFilter {
     private UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(
-            HttpServletRequest request,
-            @NotNull HttpServletResponse response,
+    protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response,
             @NotNull FilterChain filterChain) throws ServletException, IOException {
 
         response.setCharacterEncoding("UTF-8");

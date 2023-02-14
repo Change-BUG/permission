@@ -74,7 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                        // 获取哪些角色可以访问该 url
                         o.setSecurityMetadataSource(mySecurityMetadataSource);
+                        // 判断用户时候拥有上述中的角色
                         o.setAccessDecisionManager(myAccessDecisionManager);
                         return o;
                     }
