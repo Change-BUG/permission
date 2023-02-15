@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -29,15 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAccessDecisionManager myAccessDecisionManager;
 
-    @Autowired
-    private RequestConfig requestConfig;
-
     /**
      * JWT 登录 授权
      */
     @Bean
     public RequestConfig JwtTokenConfig() {
-        return requestConfig;
+        return new RequestConfig();
     }
 
     /**
@@ -48,13 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/api/v1/sysUser/login")            // 登录
                 .antMatchers("/api/v1/sysUser/register")         // 注册
-                .antMatchers("/api/v1/verificationCode") // 验证码
-                // Swagger 提供的文档访问地址
-                .antMatchers("/websocket/**")
-                .antMatchers("/swagger-resources/**")
-                .antMatchers("/webjars/**")
-                .antMatchers("/v2/**") // 文档API
-                .antMatchers("/doc.html");      // 文档地址
+                .antMatchers("/api/v1/verificationCode"); // 验证码
+
+        // swagger相关接口
+        web.ignoring().antMatchers(
+                "/doc.html",
+                "/swagger-ui.html",
+                "/swagger-resources/**",
+                "/webjars/**","/*/api-docs"
+        );
     }
 
     /**
@@ -72,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 配置  自定义 处理器
                 .expiredSessionStrategy(new MyExpiredSessionStrategy());
 
-        //所有请求都需要认证
+        // 所有请求都需要认证
         http.authorizeRequests()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
@@ -92,9 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().cacheControl();
 
         // 登录成功 登录失败
-        http.formLogin()
-                .successHandler(loginSuccessHandler)
-                .failureHandler(loginFailureHandler);
+        http.formLogin().successHandler(loginSuccessHandler).failureHandler(loginFailureHandler);
 
         // 配置 未登录时的处理器
         http.exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPointImpl());

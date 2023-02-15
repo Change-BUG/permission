@@ -1,17 +1,16 @@
 package com.ChangeBUG.config;
 
+import com.ChangeBUG.utils.JwtUtil;
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import com.ChangeBUG.utils.JwtUtil;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -25,7 +24,6 @@ import java.io.IOException;
  * JWT 登录 授权 过滤器
  */
 @Slf4j
-@Component
 public class RequestConfig extends OncePerRequestFilter {
 
     // JWT 存储的请求头
