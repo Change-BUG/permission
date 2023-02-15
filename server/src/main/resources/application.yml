@@ -1,0 +1,71 @@
+########################### 项目信息
+
+project:
+  name: 权限系统管理后台 # 项目名称
+  author: ChangeBUG # 项目作者
+  version: 1.0.1 # 项目版本
+
+########################### 端口
+
+server:
+  # 项目的端口号
+  port: 9990
+
+############################## 文件上传
+multipart:
+  #单个文件最大
+  maxFileSize: 1024MB
+  #设置总上传数据总大小
+  maxRequestSize: 10240MB
+
+########################### 项目整体 配置
+
+spring:
+  # 多环境配置
+  profiles:
+    active: BUG1
+  # 配置项目热部署
+  devtools:
+    restart:
+      # 开启 项目热部署
+      enabled: true
+
+
+########################### MyBatis-Plus
+
+mybatis-plus:
+  global-config:
+    # MyBatis-Plus 图标是否开启
+    banner: false
+  type-aliases-package: com.ChangeBUG.model
+  configuration:
+    # 驼峰命名
+    map-underscore-to-camel-case: false
+    auto-mapping-behavior: full
+    # MyBatis-Plus 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # mapper-locations: classpath*:mapperxml/*Mapper.xml
+
+########################### JWT
+
+jwt:
+  # JWT 存储的请求头
+  tokenHeader: Authorization
+  # JWT 加密使用的密钥
+  secret: ChangeBUG
+  # JWT　的　超期时间(60*60*24)[86400]一天 超期时间(60*60*24*7)[604800]一个星期
+  expiration: 86400
+  # JWT 负载中拿到开头
+  tokenHead: Bearer
+
+######################## Swagger开启控制  ########################
+
+swagger:
+  enable: true # 是否开启 swagger2
+  name: 权限系统管理后台 # 项目名称
+  author: ChangeBUG # 项目作者
+  version: 1.0.1 # 项目版本
+  basic:
+    enable: true # 是否开启 swagger2 登录
+    username: admin # 账号
+    password: 123123 # 密码
